@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; connect-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'none'" />
+    <title>Doom Fire · one algorithm, three languages</title>
+    <meta name="description" content="The fire of Doom in JavaScript, Go (WebAssembly), and GLSL (GPU), side by side, with the same parameters." />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23111'/><path d='M32 8c4 10 14 14 14 28a14 14 0 0 1-28 0c0-8 6-12 6-18 4 4 4 8 4 8 4-6 4-12 4-18z' fill='%23df4f07'/></svg>" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="top">
+      <h1>Doom Fire</h1>
+      <p>The fire of the PlayStation port of Doom, in three languages at the same time. Change a value, and the three fires change together.</p>
+      <a class="source" href="https://github.com/rahelmartim/doom-fire" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
+    </header>
+
+    <main>
+      <section class="fires" aria-label="The fires">
+        <figure class="fire" data-engine="javascript">
+          <canvas></canvas>
+          <figcaption><strong>JavaScript</strong> <span class="where">CPU</span> <span class="ms">…</span></figcaption>
+        </figure>
+        <figure class="fire" data-engine="go">
+          <canvas></canvas>
+          <figcaption><strong>Go</strong> <span class="where">CPU · WebAssembly</span> <span class="ms">…</span></figcaption>
+        </figure>
+        <figure class="fire" data-engine="glsl">
+          <canvas></canvas>
+          <figcaption><strong>GLSL</strong> <span class="where">GPU · WebGL 2</span> <span class="ms">…</span></figcaption>
+        </figure>
+      </section>
+
+      <section class="panel" aria-label="Parameters">
+        <div class="presets" id="presets" role="group" aria-label="Animations"></div>
+        <div class="knobs" id="knobs"></div>
+        <div class="row">
+          <div class="palettes" id="palettes" role="group" aria-label="Colors"></div>
+          <div class="actions">
+            <button type="button" id="pause">Pause</button>
+            <button type="button" id="light">Put out</button>
+            <button type="button" id="bench" class="main">Benchmark</button>
+          </div>
+        </div>
+        <p class="hint">The address of the page keeps the values, so you can share a fire with a link.</p>
+      </section>
+
+      <section class="panel bench" id="bench-result" hidden aria-live="polite">
+        <h2>Benchmark</h2>
+        <p class="hint" id="bench-note"></p>
+        <table>
+          <thead><tr><th>Language</th><th>Time for one step</th><th>Steps in one second</th><th></th></tr></thead>
+          <tbody id="bench-rows"></tbody>
+        </table>
+      </section>
+
+      <section class="panel code" aria-label="The code">
+        <h2>The same step in each language</h2>
+        <p class="hint">Each step sets the bottom row to the source. Then every other pixel takes the pixel below it, moved by the wind, minus a random decay.</p>
+        <div class="tabs" id="tabs" role="tablist"></div>
+        <pre><code id="code"></code></pre>
+        <p class="hint" id="code-note"></p>
+      </section>
+    </main>
+
+    <footer>
+      Made by <a href="https://github.com/rahelmartim" target="_blank" rel="noopener noreferrer">rahelmartim</a>. The algorithm is from
+      <a href="https://fabiensanglard.net/doom_fire_psx/" target="_blank" rel="noopener noreferrer">Fabien Sanglard</a>.
+    </footer>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
