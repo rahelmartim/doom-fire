@@ -1,7 +1,7 @@
 SITE := site
 PORT ?= 8080
 
-.PHONY: test web serve fire c python node clean
+.PHONY: test web serve gif fire c python node clean
 
 ## test: vet and run the Go tests (they also run the C, Python, and JavaScript versions)
 test:
@@ -23,6 +23,10 @@ web:
 ## serve: build the page and serve it on http://localhost:$(PORT)
 serve: web
 	python3 -m http.server $(PORT) --directory $(SITE)
+
+## gif: make docs/fire.gif again
+gif:
+	go run ./cmd/firegif -out docs/fire.gif
 
 ## fire: the fire in Go, in the terminal
 fire:

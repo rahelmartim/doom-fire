@@ -1,5 +1,7 @@
 # Doom Fire
 
+![The Doom fire in three palettes, with the wind changing](docs/fire.gif)
+
 The fire effect of the PlayStation port of Doom, in five languages: Go, JavaScript, GLSL, C, and Python. A web page runs three of them side by side with the same parameters: JavaScript on the CPU, Go compiled to WebAssembly, and GLSL on the GPU. Change a value, and the three fires change together.
 
 [![CI](https://github.com/rahelmartim/doom-fire/actions/workflows/ci.yml/badge.svg)](https://github.com/rahelmartim/doom-fire/actions/workflows/ci.yml)
@@ -71,6 +73,8 @@ python3 languages/python/fire.py --wind 1
 node languages/javascript/fire.mjs --wind 1
 ```
 
+To make the GIF at the top of this file again, run `make gif`.
+
 ## Tests
 
 ```bash
@@ -92,6 +96,7 @@ Chrome runs the browser tests with SwiftShader, a WebGL that runs on the CPU, so
 fire/                  # The algorithm in Go, and its tests
 cmd/doomfire/          # The Go fire in the terminal
 cmd/fire-wasm/         # The Go fire for the page (WebAssembly)
+cmd/firegif/           # The GIF at the top of this file
 languages/             # The fire in C, Python, and JavaScript, for the terminal, and their tests
 web/                   # The page
 web/engines/           # The three fires of the page: JavaScript, Go, and GLSL
