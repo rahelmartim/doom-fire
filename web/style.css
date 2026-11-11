@@ -1,0 +1,296 @@
+/* Doom Fire: dark, simple, and the fire in front. */
+
+:root {
+  --bg: #0d0d0f;
+  --panel: #151518;
+  --line: #26262b;
+  --text: #ecebe8;
+  --muted: #9a978f;
+  --fire: #df4f07;
+  --fire-2: #f0a030;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 15px/1.5 var(--sans);
+}
+
+a {
+  color: var(--fire-2);
+}
+
+:focus-visible {
+  outline: 2px solid var(--fire-2);
+  outline-offset: 2px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.top,
+main,
+footer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.top {
+  padding-top: 28px;
+  padding-bottom: 8px;
+}
+
+.top h1 {
+  margin: 0;
+  font-size: 2rem;
+  letter-spacing: -0.01em;
+}
+
+.top p {
+  margin: 4px 0 6px;
+  color: var(--muted);
+}
+
+.source {
+  font-size: 0.9rem;
+}
+
+/* The fires */
+.fires {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 18px 0;
+}
+
+.fire {
+  margin: 0;
+}
+
+.fire canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: var(--ratio, 2 / 1);
+  border-radius: 8px;
+  background: #070707;
+  image-rendering: pixelated;
+}
+
+.fire figcaption {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 0.9rem;
+}
+
+.fire .where {
+  color: var(--muted);
+}
+
+.fire .ms {
+  margin-left: auto;
+  color: var(--muted);
+  font: 0.82rem var(--mono);
+}
+
+.fire.off canvas {
+  opacity: 0.25;
+}
+
+.fire.off .ms {
+  color: var(--fire-2);
+}
+
+/* Panels */
+.panel {
+  margin: 16px 0;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+}
+
+.panel h2 {
+  margin: 0 0 4px;
+  font-size: 1.05rem;
+}
+
+.hint {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+button {
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #1d1d21;
+  color: var(--text);
+  font: 500 0.88rem var(--sans);
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: #3a3a40;
+}
+
+button[aria-pressed="true"] {
+  border-color: var(--fire);
+  color: var(--fire-2);
+}
+
+button.main {
+  border-color: transparent;
+  background: var(--fire);
+  color: #fff;
+}
+
+button.main:hover {
+  background: #f05f10;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.presets,
+.palettes,
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.knobs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px 24px;
+  margin: 18px 0;
+}
+
+.knob {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 8px;
+  font-size: 0.88rem;
+}
+
+.knob output {
+  font: 0.85rem var(--mono);
+  color: var(--fire-2);
+}
+
+.knob input {
+  grid-column: 1 / -1;
+  width: 100%;
+  accent-color: var(--fire);
+}
+
+.knob small {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.swatch {
+  display: inline-block;
+  width: 26px;
+  height: 10px;
+  margin-right: 6px;
+  border-radius: 2px;
+  vertical-align: middle;
+}
+
+/* Benchmark */
+.bench table {
+  width: 100%;
+  margin-top: 10px;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.bench th,
+.bench td {
+  padding: 6px 8px 6px 0;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+
+.bench th {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.bench td.num {
+  font-family: var(--mono);
+}
+
+.bar-cell {
+  width: 35%;
+}
+
+.bar {
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--fire), var(--fire-2));
+}
+
+/* Code */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.code pre {
+  margin: 10px 0 0;
+  padding: 14px 16px;
+  overflow-x: auto;
+  border-radius: 8px;
+  background: #0a0a0c;
+  font: 0.84rem/1.6 var(--mono);
+  tab-size: 4;
+}
+
+footer {
+  padding-top: 10px;
+  padding-bottom: 40px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 860px) {
+  .fires {
+    grid-template-columns: 1fr;
+  }
+
+  .knobs {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .knobs {
+    grid-template-columns: 1fr;
+  }
+}
